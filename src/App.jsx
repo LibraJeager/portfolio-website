@@ -1,16 +1,18 @@
-import Sidebar from "./components/layout/Sidebar";
+import Sidebar from "./components/layout/sidebar";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
 import Projects from "./components/sections/Projects";
 import ThemeToggle from "./components/ui/ThemeToggle";
 import useTheme from "./hooks/useTheme";
 import CustomCursor from "./components/ui/CustomCursor";
+import MouseGlow from "./components/ui/MouseGlow";
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen bg-transparent text-inherit">
+      <MouseGlow />
       <CustomCursor />
 
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
