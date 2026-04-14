@@ -1,31 +1,136 @@
-# 🚀 Libra's Personal Portfolio 
+# Thanh Cong — Personal Portfolio
 
-[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![React](https://img.shields.io/badge/React_19-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite_7-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS_4-%2306B6D4.svg?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-> Trang web cá nhân giới thiệu các dự án, kỹ năng và kinh nghiệm của tôi trong lĩnh vực phát triển phần mềm và khoa học dữ liệu.
+> *Where numbers whisper, clearer meanings rise.*
 
-## 🔗 Live Demo
-*Website đang được hoàn thiện. Link deploy sẽ sớm được cập nhật tại đây!*
+A cinematic, dark-themed personal portfolio built with **React** and **Vite** — designed to showcase my projects, skills, and journey as a developer with a passion for data.
 
-## 📖 Giới thiệu
-Đây là dự án portfolio cá nhân được xây dựng bằng **React** và **Vite**. Trang web này không chỉ là nơi tôi trưng bày mã nguồn, mà còn là không gian để chia sẻ các dự án tôi tâm huyết — từ các ứng dụng web e-commerce, thiết kế cơ sở dữ liệu phân tán, cho đến các nghiên cứu về xử lý tín hiệu ECG và khai phá dữ liệu.
+---
 
-## ✨ Tính năng nổi bật
-* **Giao diện hiện đại & Tối ưu UI/UX:** Trải nghiệm người dùng mượt mà trên mọi thiết bị (Responsive Design).
-* **Tốc độ tải trang cực nhanh:** Nhờ sử dụng Vite làm công cụ build.
-* **Showcase Đa dạng:** Trình bày trực quan các dự án thực tế và đồ án học thuật.
+## ✦ Design Philosophy
 
-## 💻 Công nghệ sử dụng
-* **Frontend:** React.js, HTML5, CSS3
-* **Build Tool:** Vite
-* **Version Control:** Git & GitHub
+Inspired by premium editorial portfolios with a focus on:
 
-## 🛠️ Hướng dẫn cài đặt (Dành cho nhà phát triển)
+- **Dark-first aesthetic** — Deep blacks with carefully curated neutral tones
+- **Minimalist typography** — Clean, thin-weight Inter font for an elegant editorial feel
+- **Intentional whitespace** — Breathing room that draws attention to content
+- **Subtle interactivity** — Custom cursor, mouse glow effects, and smooth reveal animations
+- **Dark / Light mode** — Seamless theme switching with consistent design language
 
-Nếu bạn muốn chạy thử dự án này trên máy tính cá nhân, hãy làm theo các bước sau:
+## ✦ Live Demo
 
-1. **Clone repository này về máy:**
-   ```bash
-   git clone [https://github.com/LibraJeager/portfolio-website.git](https://github.com/LibraJeager/portfolio-website.git)
+🔗 *Coming soon — deployment in progress.*
+
+---
+
+## ✦ Features
+
+| Feature | Description |
+|---|---|
+| **Hero Section** | Bold name display with tagline and scroll-driven intro |
+| **About Section** | Personal bio with motivation and skill showcase |
+| **Projects Showcase** | Curated grid of real-world projects with descriptions and tech tags |
+| **Sidebar Navigation** | Fixed sidebar with nav links and social icons |
+| **Theme Toggle** | Dark ↔ Light mode with smooth transitions |
+| **Custom Cursor** | Interactive custom cursor that responds to hoverable elements |
+| **Mouse Glow** | Ambient glow effect that follows the mouse pointer |
+| **Scroll Reveal** | Elements fade-in on scroll for a polished reading experience |
+| **Responsive Layout** | Fully responsive from mobile to desktop |
+
+---
+
+## ✦ Tech Stack
+
+**Core**
+- React 19 — UI library
+- Vite 7 — Lightning-fast build tool & dev server
+
+**Styling**
+- Tailwind CSS 4 — Utility-first CSS framework
+- Vanilla CSS — Custom animations & design tokens (`index.css`)
+
+**UI Enhancements**
+- Lucide React — Lightweight icon library
+- Custom hooks (`useTheme`, `useReveal`) — Theme management & scroll animations
+
+---
+
+## ✦ Project Structure
+
+```
+my-portfolio/
+├── public/                  # Static assets & favicon
+├── src/
+│   ├── assets/              # Images & media
+│   ├── components/
+│   │   ├── layout/
+│   │   │   └── Sidebar.jsx        # Fixed sidebar navigation
+│   │   ├── sections/
+│   │   │   ├── Hero.jsx           # Landing hero section
+│   │   │   ├── About.jsx          # About & skills section
+│   │   │   └── Projects.jsx       # Projects showcase grid
+│   │   └── ui/
+│   │       ├── CustomCursor.jsx   # Interactive custom cursor
+│   │       ├── MouseGlow.jsx      # Ambient mouse glow effect
+│   │       └── ThemeToggle.jsx    # Dark/Light mode switch
+│   ├── data/
+│   │   └── projects.js           # Projects data source
+│   ├── hooks/
+│   │   ├── useTheme.js           # Theme state management
+│   │   └── useReveal.js          # Scroll reveal animation hook
+│   ├── lib/                      # Utility functions
+│   ├── App.jsx                   # Root application component
+│   ├── App.css                   # App-level styles
+│   ├── index.css                 # Global design tokens & base styles
+│   └── main.jsx                  # Application entry point
+├── index.html                    # HTML template
+├── vite.config.js                # Vite configuration
+└── package.json
+```
+
+---
+
+## ✦ Getting Started
+
+### Prerequisites
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/LibraJeager/portfolio-website.git
+cd portfolio-website
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### Build for Production
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+## ✦ Design Reference
+
+This portfolio draws inspiration from dark, editorial-style portfolios — featuring bold typography on deep backgrounds, masonry-style project grids, and premium micro-interactions. The goal is a cinematic, gallery-like experience rather than a traditional developer portfolio.
+
+---
+
+## ✦ License
+
+© 2026 Thanh Cong. All rights reserved.

@@ -987,3 +987,110 @@ button {
     transform: translateX(1px);
   }
 }
+
+/* ──────────────────────────────────────────
+   Skill pills
+   ────────────────────────────────────────── */
+
+.skill-pill {
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms ease,
+    background 320ms ease,
+    color 320ms ease,
+    box-shadow 320ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-strong);
+    background: var(--surface-contrast);
+    color: var(--text-strong);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* ──────────────────────────────────────────
+   Motivation visual
+   ────────────────────────────────────────── */
+
+.motivation-image-wrapper {
+  border: 1px solid var(--line-soft);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 520ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .motivation-image-wrapper:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 26px 72px rgba(0, 0, 0, 0.18);
+  }
+}
+
+.motivation-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.motivation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.motivation-grid-item {
+  background: var(--line);
+  border-radius: 6px;
+  animation: gridPulse 4s ease-in-out infinite alternate;
+}
+
+.motivation-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    var(--bg) 40%,
+    transparent 70%
+  );
+  opacity: 0.6;
+}
+
+@keyframes gridPulse {
+  0% {
+    opacity: 0.08;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 0.22;
+    transform: scale(1);
+  }
+}
+
+/* ──────────────────────────────────────────
+   Footer navigation links
+   ────────────────────────────────────────── */
+
+.footer-nav-link {
+  transition:
+    color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 360ms ease;
+}
+
+.footer-nav-link:hover {
+  color: var(--text-strong);
+  transform: translateX(-3px);
+}

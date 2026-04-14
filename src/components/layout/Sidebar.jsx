@@ -4,7 +4,7 @@ import ThemeToggle from "../ui/ThemeToggle";
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
+  { label: "Works", href: "#projects" },
 ];
 
 const socialItems = [
