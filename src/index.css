@@ -51,16 +51,22 @@
   --project-canvas-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   --project-card-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
 
-    --cursor-dot: rgba(243, 239, 231, 0.76);
-  --cursor-ring: rgba(243, 239, 231, 0.028);
-  --cursor-ring-line: rgba(243, 239, 231, 0.11);
-  --cursor-halo: rgba(243, 239, 231, 0.016);
+  --cursor-dot: rgba(243, 239, 231, 0.52);
+  --cursor-ring: rgba(243, 239, 231, 0.014);
+  --cursor-ring-line: rgba(243, 239, 231, 0.072);
+  --cursor-halo: rgba(243, 239, 231, 0.006);
   --cursor-tag-hover: rgba(255, 255, 255, 0.02);
   --cursor-canvas-hover: rgba(255, 255, 255, 0.01);
 
   --mouse-glow-haze: rgba(241, 236, 227, 0.016);
   --mouse-glow-smoke: rgba(241, 236, 227, 0.052);
   --mouse-glow-core: rgba(248, 244, 237, 0.03);
+
+  --smoke-particle: 241, 236, 227;
+  --smoke-particle-soft: 196, 189, 176;
+  --smoke-particle-edge: 132, 126, 120;
+  --smoke-canvas-opacity: 0.62;
+
 }
 
 :root[data-theme="light"] {
@@ -127,16 +133,21 @@
   --project-card-shadow: 0 6px 16px rgba(60, 65, 88, 0.045);
 
   /* — Cursor — */
-    --cursor-dot: rgba(18, 18, 24, 0.80);
-  --cursor-ring: rgba(18, 18, 24, 0.04);
-  --cursor-ring-line: rgba(18, 18, 24, 0.13);
-  --cursor-halo: rgba(18, 18, 24, 0.022);
+  --cursor-dot: rgba(18, 18, 24, 0.48);
+  --cursor-ring: rgba(18, 18, 24, 0.012);
+  --cursor-ring-line: rgba(18, 18, 24, 0.064);
+  --cursor-halo: rgba(18, 18, 24, 0.006);
   --cursor-tag-hover: rgba(18, 18, 24, 0.024);
   --cursor-canvas-hover: rgba(18, 18, 24, 0.016);
 
   --mouse-glow-haze: rgba(150, 158, 178, 0.025);
   --mouse-glow-smoke: rgba(150, 158, 178, 0.038);
   --mouse-glow-core: rgba(138, 148, 168, 0.07);
+
+  --smoke-particle: 118, 128, 146;
+  --smoke-particle-soft: 154, 163, 178;
+  --smoke-particle-edge: 182, 188, 198;
+  --smoke-canvas-opacity: 0.28;
 }
 
 html {
@@ -705,8 +716,8 @@ button {
 }
 
 .custom-cursor-ring {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border: 1px solid var(--cursor-ring-line);
   background: var(--cursor-ring);
   box-shadow: 0 0 0 6px var(--cursor-halo);
@@ -723,8 +734,8 @@ button {
 }
 
 .custom-cursor-dot {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   background: var(--cursor-dot);
   transition:
     opacity 180ms ease,
@@ -776,113 +787,26 @@ button {
   }
 }
 
-.mouse-glow-layer {
-  pointer-events: none;
+.mouse-smoke-canvas {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 3;
-  overflow: hidden;
-}
-
-.mouse-glow-haze,
-.mouse-glow-smoke-track,
-.mouse-glow-core {
-  position: fixed;
-  left: 0;
-  top: 0;
-  will-change: transform;
   opacity: 0;
-  transition: opacity 700ms ease;
+  transition: opacity 280ms ease;
+  mix-blend-mode: screen;
+  filter: blur(5px) contrast(112%) saturate(106%);
 }
 
-.mouse-glow-layer.is-visible .mouse-glow-haze,
-.mouse-glow-layer.is-visible .mouse-glow-smoke-track,
-.mouse-glow-layer.is-visible .mouse-glow-core {
+.mouse-smoke-canvas.is-visible {
   opacity: 1;
 }
 
-.mouse-glow-haze {
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    var(--mouse-glow-haze) 0%,
-    transparent 68%
-  );
-  filter: blur(10px);
-}
-
-.mouse-glow-smoke-track {
-  width: 0;
-  height: 0;
-}
-
-.mouse-glow-smoke {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    var(--mouse-glow-smoke) 0%,
-    transparent 58%
-  );
-  filter: url(#smoke);
-}
-
-.mouse-glow-smoke-a {
-  width: 240px;
-  height: 240px;
-  opacity: 0.72;
-  animation: smoke-breathe 12s ease-in-out infinite;
-}
-
-.mouse-glow-smoke-b {
-  width: 180px;
-  height: 180px;
-  opacity: 0.55;
-  animation: smoke-drift 9s ease-in-out infinite;
-}
-
-.mouse-glow-core {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    var(--mouse-glow-core) 0%,
-    transparent 72%
-  );
-  filter: blur(10px);
-}
-
-@keyframes smoke-breathe {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  }
-
-  33% {
-    transform: translate(-50%, -50%) scale(1.14) rotate(4deg);
-  }
-
-  66% {
-    transform: translate(-50%, -50%) scale(0.92) rotate(-4deg);
-  }
-}
-
-@keyframes smoke-drift {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(0.88) rotate(0deg);
-    opacity: 0.42;
-  }
-
-  50% {
-    transform: translate(-50%, -50%) scale(1.08) rotate(-6deg);
-    opacity: 0.7;
-  }
+:root[data-theme="light"] .mouse-smoke-canvas {
+  mix-blend-mode: multiply;
+  filter: blur(4px) contrast(106%) saturate(102%);
 }
 
 .project-preview {
