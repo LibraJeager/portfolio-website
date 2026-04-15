@@ -18,6 +18,7 @@ export default function MouseGlow() {
     const haze = hazeRef.current;
     const smokeTrack = smokeTrackRef.current;
     const core = coreRef.current;
+
     if (!layer || !haze || !smokeTrack || !core) return;
 
     const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -26,35 +27,35 @@ export default function MouseGlow() {
     const corePos = { x: center.x, y: center.y };
     const target = { x: center.x, y: center.y };
     const velocity = { x: 0, y: 0 };
+
     let visible = false;
     let rafId = 0;
 
     const update = () => {
-      // layer 1 — haze drifts very slowly for atmosphere
-      hazePos.x += (target.x - hazePos.x) * 0.028;
-      hazePos.y += (target.y - hazePos.y) * 0.028;
+      // smoke is the lead layer now, not the bright core
+      hazePos.x += (target.x - hazePos.x) * 0.018;
+      hazePos.y += (target.y - hazePos.y) * 0.018;
 
-      // layer 2 — smoke follows at medium pace
-      smokePos.x += (target.x - smokePos.x) * 0.052;
-      smokePos.y += (target.y - smokePos.y) * 0.052;
+      smokePos.x += (target.x - smokePos.x) * 0.034;
+      smokePos.y += (target.y - smokePos.y) * 0.034;
 
-      // layer 3 — core follows more closely
       const prevX = corePos.x;
       const prevY = corePos.y;
-      corePos.x += (target.x - corePos.x) * 0.13;
-      corePos.y += (target.y - corePos.y) * 0.13;
 
-      // velocity tracking for directional stretching
+      corePos.x += (target.x - corePos.x) * 0.072;
+      corePos.y += (target.y - corePos.y) * 0.072;
+
       const rawVx = corePos.x - prevX;
       const rawVy = corePos.y - prevY;
-      velocity.x += (rawVx - velocity.x) * 0.18;
-      velocity.y += (rawVy - velocity.y) * 0.18;
+
+      velocity.x += (rawVx - velocity.x) * 0.14;
+      velocity.y += (rawVy - velocity.y) * 0.14;
 
       const speed = Math.sqrt(
         velocity.x * velocity.x + velocity.y * velocity.y,
       );
       const angle = Math.atan2(velocity.y, velocity.x) * (180 / Math.PI);
-      const stretch = 1 + Math.min(speed * 0.045, 0.6);
+      const stretch = 1 + Math.min(speed * 0.022, 0.22);
       const squash = 1 / Math.sqrt(stretch);
 
       haze.style.transform = `translate3d(${hazePos.x}px, ${hazePos.y}px, 0) translate(-50%, -50%)`;
@@ -64,25 +65,26 @@ export default function MouseGlow() {
       rafId = requestAnimationFrame(update);
     };
 
-    const handleMove = (e) => {
-      target.x = e.clientX;
-      target.y = e.clientY;
-
+    const reveal = () => {
       if (!visible) {
         visible = true;
         layer.classList.add("is-visible");
       }
     };
 
-    const handleLeave = () => {
+    const hide = () => {
       visible = false;
       layer.classList.remove("is-visible");
     };
 
-    const handleBlur = () => {
-      visible = false;
-      layer.classList.remove("is-visible");
+    const handleMove = (event) => {
+      target.x = event.clientX;
+      target.y = event.clientY;
+      reveal();
     };
+
+    const handleLeave = () => hide();
+    const handleBlur = () => hide();
 
     rafId = requestAnimationFrame(update);
 
@@ -100,13 +102,12 @@ export default function MouseGlow() {
 
   return (
     <div ref={layerRef} className="mouse-glow-layer" aria-hidden="true">
-      {/* SVG noise filter — creates organic smoke-like distortion */}
       <svg width="0" height="0" className="absolute">
         <defs>
-          <filter id="smoke" x="-50%" y="-50%" width="200%" height="200%">
+          <filter id="smoke" x="-60%" y="-60%" width="220%" height="220%">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.009"
+              baseFrequency="0.008"
               numOctaves="3"
               seed="2"
               result="noise"
@@ -114,25 +115,22 @@ export default function MouseGlow() {
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="40"
+              scale="34"
               xChannelSelector="R"
               yChannelSelector="G"
             />
-            <feGaussianBlur stdDeviation="3" />
+            <feGaussianBlur stdDeviation="4" />
           </filter>
         </defs>
       </svg>
 
-      {/* Layer 1: ambient haze — faint, slowest drift */}
       <div ref={hazeRef} className="mouse-glow-haze" />
 
-      {/* Layer 2: smoke — noise-filtered, breathing animation */}
       <div ref={smokeTrackRef} className="mouse-glow-smoke-track">
         <div className="mouse-glow-smoke mouse-glow-smoke-a" />
         <div className="mouse-glow-smoke mouse-glow-smoke-b" />
       </div>
 
-      {/* Layer 3: core — bright center, velocity-stretched */}
       <div ref={coreRef} className="mouse-glow-core" />
     </div>
   );

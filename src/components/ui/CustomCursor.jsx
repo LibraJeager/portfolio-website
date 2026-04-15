@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 function resolveVariant(target) {
-  const explicit = target?.closest?.("[data-cursor]")?.getAttribute("data-cursor");
-  if (explicit) return explicit;
+  const explicit = target
+    ?.closest?.("[data-cursor]")
+    ?.getAttribute("data-cursor");
+
+  if (explicit === "link") return "link";
+  if (explicit) return "soft";
 
   if (target?.closest?.("a, button, [role='button']")) return "link";
 
@@ -60,11 +64,11 @@ export default function CustomCursor() {
     let rafId = 0;
 
     const update = () => {
-      ringCurrent.x += (target.x - ringCurrent.x) * 0.16;
-      ringCurrent.y += (target.y - ringCurrent.y) * 0.16;
+      ringCurrent.x += (target.x - ringCurrent.x) * 0.14;
+      ringCurrent.y += (target.y - ringCurrent.y) * 0.14;
 
-      dotCurrent.x += (target.x - dotCurrent.x) * 0.28;
-      dotCurrent.y += (target.y - dotCurrent.y) * 0.28;
+      dotCurrent.x += (target.x - dotCurrent.x) * 0.24;
+      dotCurrent.y += (target.y - dotCurrent.y) * 0.24;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringCurrent.x}px, ${ringCurrent.y}px, 0) translate(-50%, -50%)`;
