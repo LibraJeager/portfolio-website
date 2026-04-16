@@ -65,7 +65,7 @@
   --smoke-particle: 241, 236, 227;
   --smoke-particle-soft: 196, 189, 176;
   --smoke-particle-edge: 132, 126, 120;
-  --smoke-canvas-opacity: 0.62;
+  --smoke-canvas-opacity: 0.36;
 
 }
 
@@ -147,7 +147,7 @@
   --smoke-particle: 118, 128, 146;
   --smoke-particle-soft: 154, 163, 178;
   --smoke-particle-edge: 182, 188, 198;
-  --smoke-canvas-opacity: 0.28;
+  --smoke-canvas-opacity: 0.16;
 }
 
 html {
@@ -787,26 +787,26 @@ button {
   }
 }
 
-.mouse-smoke-canvas {
+.mouse-smoke-canvas,
+.webgl-smoke-layer {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 3;
+  z-index: 4;
   opacity: 0;
-  transition: opacity 280ms ease;
-  mix-blend-mode: screen;
-  filter: blur(5px) contrast(112%) saturate(106%);
+  transition: opacity 220ms ease;
 }
 
-.mouse-smoke-canvas.is-visible {
+.mouse-smoke-canvas.is-visible,
+.webgl-smoke-layer.is-visible {
   opacity: 1;
 }
 
-:root[data-theme="light"] .mouse-smoke-canvas {
-  mix-blend-mode: multiply;
-  filter: blur(4px) contrast(106%) saturate(102%);
+:root[data-theme="light"] .mouse-smoke-canvas,
+:root[data-theme="light"] .webgl-smoke-layer {
+  /* Inherit normal blending from WebGL's internal alpha */
 }
 
 .project-preview {

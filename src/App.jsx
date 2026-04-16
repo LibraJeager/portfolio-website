@@ -6,14 +6,14 @@ import Footer from "./components/sections/Footer";
 import ThemeToggle from "./components/ui/ThemeToggle";
 import useTheme from "./hooks/useTheme";
 import CustomCursor from "./components/ui/CustomCursor";
-import MouseGlow from "./components/ui/MouseGlow";
+import WebGLSmoke from "./components/ui/WebGLSmoke";
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen bg-transparent text-inherit">
-      <MouseGlow />
+      <WebGLSmoke />
       <CustomCursor />
 
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
