@@ -58,14 +58,7 @@
   --cursor-tag-hover: rgba(255, 255, 255, 0.02);
   --cursor-canvas-hover: rgba(255, 255, 255, 0.01);
 
-  --mouse-glow-haze: rgba(241, 236, 227, 0.016);
-  --mouse-glow-smoke: rgba(241, 236, 227, 0.052);
-  --mouse-glow-core: rgba(248, 244, 237, 0.03);
 
-  --smoke-particle: 241, 236, 227;
-  --smoke-particle-soft: 196, 189, 176;
-  --smoke-particle-edge: 132, 126, 120;
-  --smoke-canvas-opacity: 0.36;
 
 }
 
@@ -785,28 +778,6 @@ button {
   .has-custom-cursor [data-cursor="project"]:hover {
     transform: translateX(1px);
   }
-}
-
-.mouse-smoke-canvas,
-.webgl-smoke-layer {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 4;
-  opacity: 0;
-  transition: opacity 220ms ease;
-}
-
-.mouse-smoke-canvas.is-visible,
-.webgl-smoke-layer.is-visible {
-  opacity: 1;
-}
-
-:root[data-theme="light"] .mouse-smoke-canvas,
-:root[data-theme="light"] .webgl-smoke-layer {
-  /* Inherit normal blending from WebGL's internal alpha */
 }
 
 .project-preview {
